@@ -23,11 +23,15 @@ const imgs = createImgs(section, 200);
 
 //마우스 움직일때마다 img갯수에 맞게 백분율 변환한 값을 정수(퍼센트)로 반환
 window.addEventListener('mousemove', (e) => {
-	let percent = parseInt((e.pageX / window.innerWidth) * imgs.length);
-
+	const percent = getPercent(e, imgs.length);
 	imgs.forEach((img) => (img.style.display = 'none'));
 	imgs[percent].style.display = 'block';
 });
+
+//이미지 갯수에 따라 백분율 반환하는 함수
+function getPercent(e, num) {
+	return (percent = parseInt((e.pageX / window.innerWidth) * num));
+}
 
 //프레임요소와 갯수를 인수로 받아서 동적 이미지 생성해주는 함수로 만들기 (함수호출 위에서해주기)
 function createImgs(frame, num, fileInfo = ['img', 'pic', 'jpg']) {
