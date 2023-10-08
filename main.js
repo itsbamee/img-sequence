@@ -9,18 +9,17 @@
 */
 
 const section = document.querySelector('section');
+const imgs = createImgs(section, 200);
+// const imgs = createImgs(section, 200, ['img', 'abc', 'png']);
 
 //동적으로 200개의 imgDOM 생성
-for (let i = 0; i < 200; i++) {
-	const img = document.createElement('img');
-	const src = document.createAttribute('src');
-	src.value = `img/pic${i}.jpg`;
-	img.setAttributeNode(src);
-	section.append(img);
-}
-
-//생성된 img요소 유사배열을 변수에 할당
-const imgs = section.querySelectorAll('img');
+// for (let i = 0; i < 200; i++) {
+// 	const img = document.createElement('img');
+// 	const src = document.createAttribute('src');
+// 	src.value = `img/pic${i}.jpg`;
+// 	img.setAttributeNode(src);
+// 	section.append(img);
+// }
 
 //마우스 움직일때마다 img갯수에 맞게 백분율 변환한 값을 정수(퍼센트)로 반환
 window.addEventListener('mousemove', (e) => {
@@ -29,3 +28,15 @@ window.addEventListener('mousemove', (e) => {
 	imgs.forEach((img) => (img.style.display = 'none'));
 	imgs[percent].style.display = 'block';
 });
+
+//프레임요소와 갯수를 인수로 받아서 동적 이미지 생성해주는 함수로 만들기 (함수호출 위에서해주기)
+function createImgs(frame, num, fileInfo = ['img', 'pic', 'jpg']) {
+	for (let i = 0; i < num; i++) {
+		const img = document.createElement('img');
+		const src = document.createAttribute('src');
+		src.value = `${fileInfo[0]}/${fileInfo[1]}${i}.${fileInfo[2]}`;
+		img.setAttributeNode(src);
+		frame.append(img);
+	}
+	return frame.querySelectorAll('img');
+}
