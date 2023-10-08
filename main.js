@@ -10,6 +10,7 @@
 
 const section = document.querySelector('section');
 
+//동적으로 200개의 imgDOM 생성
 for (let i = 0; i < 200; i++) {
 	const img = document.createElement('img');
 	const src = document.createAttribute('src');
@@ -18,14 +19,13 @@ for (let i = 0; i < 200; i++) {
 	section.append(img);
 }
 
+//생성된 img요소 유사배열을 변수에 할당
+const imgs = section.querySelectorAll('img');
+
+//마우스 움직일때마다 img갯수에 맞게 백분율 변환한 값을 정수(퍼센트)로 반환
 window.addEventListener('mousemove', (e) => {
-	//백분율 : (현재수치값 / 전체수치값) * 100(or200 : 200분율을 구한다면)
-	//이미지 갯수에 따른 포인터 위치값 백분율 (현재위치/전체브라우저 넓이)*이미지갯수
-	const curPos = e.pageX;
-	const wid = window.innerWidth; //콘솔창 뺀 내부, (콘솔창 포함은 outerWidth)
-	const num = 200;
-	let percent = (curPos / wid) * num;
-	//parseInt(변환할 수) : 실수값에서 소수점 아래를 버려서 정수로 반환
-	percent = parseInt(percent);
-	console.log(percent);
+	let percent = parseInt((e.pageX / window.innerWidth) * imgs.length);
+
+	imgs.forEach((img) => (img.style.display = 'none'));
+	imgs[percent].style.display = 'block';
 });
