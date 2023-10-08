@@ -17,3 +17,15 @@ for (let i = 0; i < 200; i++) {
 	img.setAttributeNode(src);
 	section.append(img);
 }
+
+window.addEventListener('mousemove', (e) => {
+	//백분율 : (현재수치값 / 전체수치값) * 100(or200 : 200분율을 구한다면)
+	//이미지 갯수에 따른 포인터 위치값 백분율 (현재위치/전체브라우저 넓이)*이미지갯수
+	const curPos = e.pageX;
+	const wid = window.innerWidth; //콘솔창 뺀 내부, (콘솔창 포함은 outerWidth)
+	const num = 200;
+	let percent = (curPos / wid) * num;
+	//parseInt(변환할 수) : 실수값에서 소수점 아래를 버려서 정수로 반환
+	percent = parseInt(percent);
+	console.log(percent);
+});
