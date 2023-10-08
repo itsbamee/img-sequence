@@ -50,10 +50,9 @@ function createImgs(frame, num, fileInfo = ['img', 'pic', 'jpg']) {
 		//해당DOM에 수반되는 소스 이미지가 로딩완료시 실행되는 이벤트
 		img.onload = () => {
 			imgCount++;
-			console.log(`현재로딩되는 이미지 갯수:${imgCount}`);
+			const percent = parseInt((imgCount / imgs.length) * 100);
+			mask.querySelector('span').innerText = percent;
 			if (imgCount === imgs.length) {
-				//동적으로 만들어진 이미지의 갯수와 현재 로딩될때마다 증가되는 카운트값이 동일한 순간
-				//모든 DOM의 소스이미지가 렌더링 완료된 순간
 				console.log(`모든 이미지 소스 로딩완료`);
 				mask.remove();
 			}
