@@ -7,3 +7,13 @@
   6. 이미지소스가 로딩되는 과정을 100분율로 변환해서 로딩바 형태로 화면출력
   7. 이미지소스 로딩 완료시 마스크 제거
 */
+
+const section = document.querySelector('section');
+
+for (let i = 0; i < 200; i++) {
+	const img = document.createElement('img');
+	const src = document.createAttribute('src');
+	src.value = `img/pic${i}.jpg`;
+	img.setAttributeNode(src);
+	section.append(img);
+}
