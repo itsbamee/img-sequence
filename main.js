@@ -9,6 +9,7 @@
 */
 
 const section = document.querySelector('section');
+const mask = document.querySelector('aside');
 const imgs = createImgs(section, 200);
 // const imgs = createImgs(section, 200, ['img', 'abc', 'png']);
 
@@ -42,5 +43,21 @@ function createImgs(frame, num, fileInfo = ['img', 'pic', 'jpg']) {
 		img.setAttributeNode(src);
 		frame.append(img);
 	}
-	return frame.querySelectorAll('img');
+	const imgs = frame.querySelectorAll('img');
+
+	let imgCount = 0;
+	imgs.forEach((img) => {
+		//해당DOM에 수반되는 소스 이미지가 로딩완료시 실행되는 이벤트
+		img.onload = () => {
+			imgCount++;
+			console.log(`현재로딩되는 이미지 갯수:${imgCount}`);
+			if (imgCount === imgs.length) {
+				//동적으로 만들어진 이미지의 갯수와 현재 로딩될때마다 증가되는 카운트값이 동일한 순간
+				//모든 DOM의 소스이미지가 렌더링 완료된 순간
+				console.log(`모든 이미지 소스 로딩완료`);
+				mask.remove();
+			}
+		};
+	});
+	return imgs;
 }
